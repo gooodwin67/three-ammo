@@ -57,6 +57,9 @@ let physicsWorld;
 let rigidBodies = [];
 let tmpTrans;
 
+let ballObject;
+
+
 
 //-------------------//
 
@@ -104,6 +107,9 @@ function createBlock() {
   let rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, motionState, colShape, localInertia);
   let body = new Ammo.btRigidBody(rbInfo);
 
+  body.setFriction(4);
+  body.setRollingFriction(10);
+
   physicsWorld.addRigidBody(body);
 }
 
@@ -118,7 +124,7 @@ function createBall() {
   let mass = 1;
 
   //threeJS Section
-  let ball = new THREE.Mesh(new THREE.SphereGeometry(radius), new THREE.MeshPhongMaterial({ color: 0xff0505 }));
+  let ball = ballObject = new THREE.Mesh(new THREE.SphereGeometry(radius), new THREE.MeshPhongMaterial({ color: 0xff0505 }));
   ball.position.set(pos.x, pos.y, pos.z);
   scene.add(ball);
 
@@ -137,6 +143,9 @@ function createBall() {
 
   let rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, motionState, colShape, localInertia);
   let body = new Ammo.btRigidBody(rbInfo);
+
+  body.setFriction(4);
+  body.setRollingFriction(10);
 
   physicsWorld.addRigidBody(body);
 
